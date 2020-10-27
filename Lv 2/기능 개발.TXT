@@ -1,0 +1,42 @@
+# https://programmers.co.kr/learn/courses/30/lessons/42586
+
+def solution(progresses, speeds):
+    answer = []
+    _answer = []    #100이 될때까지 필요한 날짜 리스트
+
+    for p, s in zip(progresses, speeds):
+        i = 0
+        while p < 100:
+            p += s
+            i += 1
+        #endwhile
+        _answer.append(i)
+    #endfor
+    # 여기서 _answer = [7,3,9], [5,10,1,1,20,1]
+    del i, p, s #메모리에서 제거
+
+    num = _answer[0] #배포에 걸리는 날짜 (초기값)
+    i = 1 #배포 개수
+    for _ in range(1, len(_answer)):
+        if num >= _answer[_]:
+            i += 1
+        else:
+            num = _answer[_]
+            answer.append(i)
+            i = 1
+    else:
+        answer.append(i)
+    #endfor
+    del i, num
+    
+    return answer
+
+#사용한 함수 : zip
+
+#풀이 
+#1. progresses 리스트에서 항목별 완료에 걸리는 날짜를 _answer 리스트에 저장
+#2. _answer 리스트의 첫 번째 항목을 num으로 할당
+#3. _answer 리스트에서 하나씩 꺼내와서 num이랑 비교. 크면 그대로 작으면 num값을 변경
+#4. 맨마지막꺼도 포함시키기 위해 for-else문 사용. 혼자 남았다면 for문 안의 if-else에서 else문으로 진입한게 마지막 일테니 i =1이 answer에 추가됌. 혼자가 아니라면 for문 안의 if-else에서 if문으로 진입한게 마지막 일테니 그 값이 i에 추가됌
+
+#기타
