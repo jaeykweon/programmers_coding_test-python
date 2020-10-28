@@ -1,0 +1,34 @@
+# https://programmers.co.kr/learn/courses/30/lessons/42587
+# 중요도 있는 큐
+from collections import deque
+
+def solution(priorities, location):
+    answer = 0
+    
+    priorities_deque = deque(priorities)
+    priorities.sort(reverse=True)  #중요도 순서대로 정렬
+
+    while 1 : #요청한 문서를 프린트 할 때까지 반복
+        head = priorities_deque.popleft()
+        if head == priorities[0]: #방금 꺼낸게 제일 큰 거라면
+            answer += 1
+            del priorities[0] #꺼낸거 삭제
+            if location == 0: #방금 꺼낸게 내가 출력하려던 거라면
+                break
+    
+        priorities_deque.append(head)
+        location = location - 1 if location != 0 else len(priorities_deque) -1 #location 한칸 땡김
+        
+    return answer
+
+
+#사용한 함수 : deque, sort
+
+#풀이
+#1. 프린터 출력 중요도 리스트를 deque(priorities_deque)로 복사
+#2. 프린터 중요도 리스트를 역순정렬(숫자가 높은 거부터)
+#3. 프린터 deque를 앞에서부터 하나씩 빼와서 중요도 리스트 첫번째(priorities[0])와 비교
+#4.1 제일 큰 거라면 priorities[0]삭제
+#4.2 삭제한게 내가 출력하려던거라면 break
+#5. 제일 큰게 아니라면 deque 맨 뒤로 다시 붙여넣기
+#6. location 한 칸 땡기기

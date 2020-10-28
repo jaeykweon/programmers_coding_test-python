@@ -1,0 +1,32 @@
+# https://programmers.co.kr/learn/courses/30/lessons/42583
+
+from collections import deque
+
+def solution(bridge_length, weight_allowed, truck_weights):
+    answer = 0
+    on_bridge_deque = deque([0]* bridge_length) # 다리 위에 있는 트럭들
+    on_bridge_weight = 0 #다리 위에 있는 트럭의 무게 합
+    
+    for truck in truck_weights:
+        while on_bridge_weight - on_bridge_deque[0]  + truck > weight_allowed: # 현재 무게 - 내려갈 무게 + 올라올 무게 > 최대 하중
+            on_bridge_weight -= on_bridge_deque.popleft() #지나간 트럭 무게는 빼기
+            on_bridge_deque.append(0)
+            answer += 1
+        #endwhile
+        
+        on_bridge_weight -= on_bridge_deque.popleft() #지나간 트럭 무게는 빼기
+        on_bridge_deque.append(truck)
+        on_bridge_weight += truck
+        answer += 1
+    #endfor
+    
+    answer += bridge_length
+            
+    return answer
+
+#사용한 함수 : deque (from collections import deque)
+
+#1. 다리 길이만큼의 리스트를 deque(on_bridge_deque) 로 설정
+#2. 매 순간마다 popleft와 append를 통해  빼오고 추가함
+#3.1 '현재 무게 - 내려갈 무게 + 올라올 무게 > 최대 하중' 일 경우엔 popleft로 왼쪽꺼 빼고 append(truck)으로 추가
+#3.2 위가 아니라면 popleft로 한칸 빼고 append(0)로 칸 수 맞추기
