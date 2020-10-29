@@ -1,0 +1,43 @@
+#https://programmers.co.kr/learn/courses/30/lessons/42584
+
+class loopend(Exception):
+    pass
+
+def solution(prices):
+    answer = []
+    prices.reverse()    #리스트를 거꾸로 해서 pop으로 하나씩 꺼내올 생각
+    
+    while len(prices) > 1:
+        time = 0
+        start_price = prices.pop()
+        
+        try:
+            for compare_price in reversed(prices):      #초기 리스트의 앞에꺼부터 꺼내와야하므로 다시 reversed
+                time += 1                               # 맨 마지막꺼 빼고 무조건 1초는 있으므로 일단 +1
+                if compare_price >=  start_price:
+                    continue
+                else:
+                    raise loopend              
+        
+        except loopend:     #break 문 대신에 이걸로 사용
+            pass
+        
+        finally :
+            answer.append(time)
+
+    answer.append(0)    #맨 마지막꺼는 비교대상이 없으므로 임의로 0 추가
+    
+    return  answer
+
+
+#사용한 함수: try-except문
+
+#풀이
+#1. 가격 리스트를 뒤집어서 하나씩 가져온다.
+#2. 리스트를 다시 뒤집어서 하나씩 순차 비교한다.
+#3. try문이라서 break대신에 raise를 사용하였다.
+
+#기타
+#일부러 try except finally 사용해보고싶어서 이렇게 풀었다.
+#에러 명을 정확히 알면 굳이 class를 만들어줄 필요가 없다.
+#이때는 deque를 몰라서 뒤집고 또 뒤집었지만, deque면 뒤집을 필요가 없다.

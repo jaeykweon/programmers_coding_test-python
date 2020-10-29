@@ -1,0 +1,34 @@
+#https://programmers.co.kr/learn/courses/30/lessons/49993
+
+from collections import deque
+
+def solution(skill, skill_trees):
+    answer = 0
+    
+    for skill_tree in skill_trees:
+        skill_deque = deque(skill)      #밑에서 popleft하기때문에 새로 만들어줘야함
+        
+        for each_skill in skill_tree:
+            if each_skill in skill_deque:
+                if each_skill == skill_deque[0]:
+                    skill_deque.popleft()
+                else:
+                    break
+        else:   #break안걸리면 다 통과했다는 의미
+            answer += 1
+        #endfor
+    #endfor
+    return answer
+
+
+#사용한 함수: deque, for-else
+
+#풀이
+#1. skill_trees에서 하나씩 꺼내오고 이게 skill에 있는지 확인
+#2. 있다면 skill[0]과 비교해서 같으면 skill[0]을 제거
+#3. 같지 않다면 스킬 찍는 순서가 틀린것이므로 break
+#4. skill을 다 제거하고도 break가 걸리지 않았다면 이상이 없으므로 answer+=1
+
+#기타
+#스킬 제거할 때 스킬 리스트의 길이가 0이되면 굳이 뒤에꺼 안해도 될거같다
+#근데 매번 리스트 길이 검사하기 vs 그냥 끝까지 하기 중에 skill_tress 원소 최대 길이가 26이므로 후자를 선택
