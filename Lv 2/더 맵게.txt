@@ -1,0 +1,31 @@
+# https://programmers.co.kr/learn/courses/30/lessons/42626
+
+import heapq
+
+def solution(scoville, K):
+    answer = 0
+    heap = []
+    
+    for each in scoville:
+        heapq.heappush(heap, each)
+    #endfor
+    
+    while heap[0] < K:
+        try:
+            heapq.heappush(heap, heapq.heappop(heap) + heapq.heappop(heap)  *2 )
+            answer += 1
+        except IndexError:
+            return -1
+    #endwhile
+    
+    return answer
+
+
+#사용한 함수 : heapq(우선순위 큐), try-except
+
+#풀이
+#1. 순서가 있는 큐가 필요하기때문에 heapq를 사용
+#2. 일반 큐의 popleft와 같은 역할로 heapq.heappop를 사용하며, 가장 작은 값을 가져온다.
+#3. 가져온 값으로 연산을 하고 heappush로 다시 heapq에 넣는다.(heapq는 값을 넣으면 자동 정렬된다.)
+#4. heapq[0]가 k보다 크다면 while문을 빠져나갈것이고, 작다면 while문을 계속 돈다.
+#5.  try문에 진입했는데 에러가 나면( 리스트의 길이가 0인데 pop을 하는 경우) except로 이동

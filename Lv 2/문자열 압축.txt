@@ -1,0 +1,48 @@
+# https://programmers.co.kr/learn/courses/30/lessons/60057
+
+def solution(s):
+
+    answer_list = [0] * (len(s)//2) if len(s) % 2 == 0 else [0] * (len(s)//2 + 1) #위치 +1 의 개수로 분할한 길이를 각각 저장할 리스트
+    s_splited = []
+    
+    for i in range(1, len(answer_list)+1): # i만큼씩 분할
+        n = 1
+        tmp = s[0:i]
+        na = len(s) % i #아래에서 짜르고 난 나머지
+        
+        for j in range(i, len(s)+1, i):
+                
+            if tmp == s[j : i+j]: #현재꺼랑 다음꺼 비교
+                n += 1
+                continue
+            
+            else:
+                if n == 1:
+                    s_splited.append(tmp)
+                else:
+                    s_splited.append(str(n) + tmp)
+                
+                tmp = s[j : i+j]    #다음꺼
+                n = 1
+        #endfor
+        
+        if na !=0:  #만약 자르고 남은게 있다면
+            s_splited.append(s[-na:])
+            
+        s_splited_len = 0
+        for each in s_splited:
+            s_splited_len += len(each)
+            
+        answer_list[i-1] = s_splited_len
+        del s_splited[:] #이전에 있던거 삭제
+    #endfor
+    
+    return min(answer_list)
+
+
+#사용한 함수: 리스트 슬라이싱
+
+#풀이 :
+#1.분할 하는 개수의 최대치는 단어 길이의 절반
+#2. 1부터 최대치만큼 하나씩 문자열 압축을 수행하고 그 길이를 answer_list에 저장
+#3. answer_list의 최소치를 반환
