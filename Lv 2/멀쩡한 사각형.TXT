@@ -6,4 +6,8 @@ def solution(w,h):
 
         return w * h - (w+h -math.gcd(w,h))
 
-#math.gcd는 최대공약수를 구하는 함수
+# 사용한 함수 :math.gcd (import math)
+
+#풀이:
+#1.하얀 박스들을 좌로 밀었을 때, 아래로 밀었을때 각각 가로와 세로 길이 + α
+#2. α는.. 머지..
