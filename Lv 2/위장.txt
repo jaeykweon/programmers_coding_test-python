@@ -1,0 +1,24 @@
+# https://programmers.co.kr/learn/courses/30/lessons/42578
+
+def solution(clothes):
+    answer = 1
+    
+    clothes_dict = dict()
+    for each in clothes:
+        if each[1] in clothes_dict.keys():
+            clothes_dict[each[1]] += 1
+        else:
+            clothes_dict[each[1]] = 1
+    #endfor
+    
+    for val in clothes_dict.values():
+        answer *= (val + 1)
+    
+    return answer - 1 #전부 안입는 경우 제외
+
+
+#사용한 함수 : -
+
+#풀이
+#1.clothes를 우선 딕셔너리에 넣어 의상 종류로 구분한다.(겹치는 옷은 없으므로 숫자로 계산)
+#2. 각 종류별 갯수를 곱한 것에서 전부 안 입는 한가지 경우를 제외하면 된다.
