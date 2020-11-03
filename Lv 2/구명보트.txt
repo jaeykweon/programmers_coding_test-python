@@ -1,0 +1,32 @@
+# https://programmers.co.kr/learn/courses/30/lessons/42885
+
+
+from collections import deque
+
+
+def solution(people, limit):
+    answer = 0
+    deque_people = deque(sorted(people))  #[50,50,70,80]
+    
+    try:
+        while len(deque_people) >= 1:
+            answer += 1 #아래 조건과 관계없이 무조건 보트 1개 필요
+            last = deque_people.pop()
+            if last + deque_people[0] > limit:
+                continue
+            else:
+                deque_people.popleft()  #아무것도없는데 이거 하면 에러발생 -> except문으로 ㄱㄱ
+        #endwhile
+    except:
+        pass
+    
+    return answer
+
+
+# 사용한 함수 : sorted, deque (from collections import deque), try-execpt
+
+#풀이:
+#0.한 보트에는 최대 두명밖에 태우지 못하므로 가장 무거운 사람을 기준으로 한다.
+#1.1 가장 무거운 사람에 가장 가벼운 사람을 더했을 때, 한계치를 넘으면 가장 무거운 사람 혼자만 태운다.
+#1.2 한계치를 넘지 않으면 같이 보낸다.
+#2. 그러다가 pop이나 popleft에서 에러가 나면 종료(사람이 더 이상 없는 것으로 판단)
