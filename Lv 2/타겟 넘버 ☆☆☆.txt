@@ -1,0 +1,22 @@
+def solution(numbers, target):
+    tree = []
+    
+    for num in numbers:
+        sub_tree = []
+        for tree_num in tree:
+            sub_tree.append(tree_num + num)
+            sub_tree.append(tree_num - num)
+        #endfor
+        tree = sub_tree
+    #endfor
+        
+    return tree.count(target)
+
+
+#사용한 함수: count
+
+#풀이: 
+#1. 각 숫자는 더하거나 빼거나 이므로 이진트리 구조와 동일
+
+#기타
+#BFS와 DFS의 차이 (https://cyc1am3n.github.io/2019/04/26/bfs_dfs_with_python.html)
