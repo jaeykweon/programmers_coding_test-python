@@ -1,0 +1,26 @@
+# https://programmers.co.kr/learn/courses/30/lessons/42842
+
+def solution(brown, yellow):
+    answer = []
+    
+    whole = brown + yellow
+    y_max = int(whole ** 0.5)  #y의 최대치
+    
+    for y in range(3, y_max+1):
+        mok, na = divmod(whole, y)
+        if na == 0 :
+            if mok * y == whole and (mok-2)*(y-2) == yellow:
+                break
+    
+    return [mok, y]
+
+
+#사용한 함수 : divmod()
+
+#풀이
+#1. 가로> 세로이므로  whole ** 0.5 까지만 계산하면 된다.
+#2. 가로 x 세로 = 전체, (가로-2) x (세로 - 2) = 노랑색 인 방정식을 풀면 됌(물론 컴퓨터가)
+
+
+#문제 자체가 어렵기 보다는 이 문제를 완전 탐색 문제로 생각하기가 쉽지않음
+#for y in range(3, y_max+1): 대신에 y_max = math.ceil(whole ** 0.5)하고 for y in range(3, y_max): 로 해도 될 듯 (import math 필요)
