@@ -1,0 +1,25 @@
+# https://programmers.co.kr/learn/courses/30/lessons/12909
+
+def solution(s):
+    
+    stack = []
+    
+    for each in s:
+        if each == '(':
+            stack.append(each)
+        elif each == ')':
+            if len(stack) == 0:
+                return False
+            else:
+                stack.pop()
+                
+    return True if len(stack) == 0 else False
+
+
+#사용한 함수 : -
+
+#풀이
+#1. s에서 꺼내온 문자가 '('이면 무조건 추가
+#2. s에서 꺼내온 문자가 ')'일 때, 
+#2.1 stack이 비어있으면 이후에 ')'를 지울 수 없으므로 false
+#2.2 stack에 뭐가 있다면 무조건 '('이므로 pop 실행
