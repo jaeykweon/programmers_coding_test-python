@@ -1,7 +1,6 @@
 # https://programmers.co.kr/learn/courses/30/lessons/42842
 
 def solution(brown, yellow):
-    answer = []
     
     whole = brown + yellow
     y_max = int(whole ** 0.5)  #y의 최대치
