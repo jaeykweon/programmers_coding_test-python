@@ -1,0 +1,20 @@
+# https://programmers.co.kr/learn/courses/30/lessons/12911?language=python3
+
+def solution(n):
+    answer = n
+    num_of_1 = str(bin(n)).count('1')
+    while 1:
+        answer += 1
+        if num_of_1 == bin(answer).count('1'):
+            break
+            
+    return answer
+
+#사용한 함수: bin (2진수 변환 함수)
+
+#풀이:
+#1. n을 2진수로 변환한 다음 1의 개수를 센다
+#2. n에서 1씩 더한 후 2진수로 변환한다. 이 수의 1의 개수를 세고 1과 비교
+
+#기타
+# bin() 함수는 자동 str 변환된다.
